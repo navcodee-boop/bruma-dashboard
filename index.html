@@ -16,293 +16,220 @@
       min-height: 100vh;
     }
 
-    /* LOADING OVERLAY */
+    /* LOADING */
     .loading-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(255,255,255,0.65);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      color: #78716c;
+      display: none; position: fixed; inset: 0;
+      background: rgba(255,255,255,0.7); z-index: 200;
+      align-items: center; justify-content: center;
+      font-size: 13px; color: #78716c;
     }
     .loading-overlay.visible { display: flex; }
 
     /* HEADER */
     .header {
-      background: #fff;
-      border-bottom: 1px solid #e7e5e4;
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      background: #fff; border-bottom: 1px solid #e7e5e4;
+      padding: 0 28px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 10;
     }
-    .header-title { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
-    .header-sub { font-size: 12px; color: #a8a29e; margin-top: 1px; }
+    .header-brand { display: flex; align-items: center; gap: 10px; }
+    .header-logo {
+      width: 28px; height: 28px; background: #1c1917; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #fff; letter-spacing: 0.5px;
+    }
+    .header-title { font-size: 14px; font-weight: 600; letter-spacing: -0.2px; }
     .header-right { display: flex; gap: 8px; align-items: center; }
-    .sync-time { font-size: 12px; color: #a8a29e; }
+    .header-sync { font-size: 12px; color: #a8a29e; }
+    .conn-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #d6d3d1;
+      display: inline-block; margin-right: 5px;
+    }
+    .conn-dot.on { background: #16a34a; }
 
     /* BUTTONS */
     .btn {
-      padding: 6px 12px;
-      border: 1px solid #e7e5e4;
-      background: #fff;
-      color: #1c1917;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 500;
-      transition: background 0.1s;
-      white-space: nowrap;
+      padding: 7px 13px; border: 1px solid #e7e5e4; background: #fff;
+      color: #1c1917; border-radius: 7px; cursor: pointer;
+      font-size: 12px; font-weight: 500; transition: background 0.1s;
+      white-space: nowrap; touch-action: manipulation;
     }
     .btn:hover { background: #f5f5f4; }
     .btn.active { background: #1c1917; color: #fff; border-color: #1c1917; }
     .btn-primary { background: #1c1917; color: #fff; border-color: #1c1917; }
     .btn-primary:hover { background: #292524; }
-    .btn-sm { padding: 3px 8px; font-size: 11px; }
-    .btn-danger { color: #dc2626; border-color: transparent; background: transparent; font-size: 14px; line-height: 1; }
-    .btn-danger:hover { background: #fef2f2; border-color: #fecaca; }
+    .btn-danger { color: #dc2626; border-color: transparent; background: transparent; font-size: 15px; padding: 4px 8px; }
+    .btn-danger:hover { background: #fef2f2; border-color: #fecaca; border-radius: 5px; }
 
     /* STATUS BAR */
-    .status-bar {
-      padding: 8px 24px;
-      font-size: 12px;
-      display: none;
-      border-bottom: 1px solid;
-    }
+    .status-bar { padding: 8px 28px; font-size: 12px; display: none; border-bottom: 1px solid; }
     .status-bar.warning { background: #fffbeb; border-color: #fde68a; color: #92400e; }
     .status-bar.error   { background: #fef2f2; border-color: #fecaca; color: #dc2626; }
     .status-bar.success { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
 
     /* CONFIG PANEL */
-    .config-panel {
-      background: #fff;
-      border-bottom: 1px solid #e7e5e4;
-      padding: 16px 24px;
-    }
-    .config-title { font-size: 13px; font-weight: 600; color: #44403c; margin-bottom: 12px; }
+    .config-panel { background: #fff; border-bottom: 1px solid #e7e5e4; padding: 18px 28px; }
+    .config-title { font-size: 13px; font-weight: 600; color: #44403c; margin-bottom: 14px; }
     .mode-toggle {
-      display: inline-flex;
-      border: 1px solid #e7e5e4;
-      border-radius: 6px;
-      overflow: hidden;
-      margin-bottom: 14px;
+      display: inline-flex; border: 1px solid #e7e5e4;
+      border-radius: 7px; overflow: hidden; margin-bottom: 14px;
     }
-    .mode-btn {
-      padding: 6px 14px;
-      border: none;
-      background: #fff;
-      font-size: 12px;
-      cursor: pointer;
-      font-weight: 500;
-      color: #78716c;
-      transition: all 0.1s;
-    }
+    .mode-btn { padding: 6px 14px; border: none; background: #fff; font-size: 12px; cursor: pointer; font-weight: 500; color: #78716c; }
     .mode-btn + .mode-btn { border-left: 1px solid #e7e5e4; }
     .mode-btn.active { background: #1c1917; color: #fff; }
     .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 760px; }
     .config-field label { display: block; font-size: 11px; font-weight: 500; color: #78716c; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
-    .config-field input {
-      width: 100%;
-      padding: 7px 10px;
-      border: 1px solid #e7e5e4;
-      border-radius: 6px;
-      font-size: 13px;
-      color: #1c1917;
-      background: #fafaf9;
-    }
+    .config-field input { width: 100%; padding: 8px 10px; border: 1px solid #e7e5e4; border-radius: 7px; font-size: 13px; color: #1c1917; background: #fafaf9; }
     .config-field input:focus { outline: none; border-color: #a8a29e; background: #fff; }
     .config-field.full { grid-column: 1 / -1; }
-    .config-actions { display: flex; gap: 8px; margin-top: 12px; align-items: center; }
+    .config-actions { display: flex; gap: 8px; margin-top: 14px; align-items: center; }
     .config-note { font-size: 11px; color: #a8a29e; margin-top: 8px; }
     .config-note a { color: #57534e; }
 
     /* MAIN */
-    .main { padding: 20px 24px; max-width: 1180px; margin: 0 auto; }
+    .main { padding: 22px 28px; max-width: 1200px; margin: 0 auto; }
 
     /* STATS */
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px; }
     .stat-card {
-      background: #fff;
-      border: 1px solid #e7e5e4;
-      border-radius: 8px;
-      padding: 14px 16px;
+      background: #fff; border: 1px solid #e7e5e4; border-radius: 10px;
+      padding: 16px 18px; display: flex; flex-direction: column; gap: 8px;
+      transition: box-shadow 0.15s;
     }
-    .stat-card .label { font-size: 11px; color: #a8a29e; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
-    .stat-card .value { font-size: 30px; font-weight: 700; letter-spacing: -1.5px; }
-    .stat-card.s-pendiente .value { color: #78716c; }
-    .stat-card.s-progreso  .value { color: #2563eb; }
-    .stat-card.s-bloqueada .value { color: #dc2626; }
-    .stat-card.s-completada .value { color: #16a34a; }
+    .stat-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .stat-card .s-label { font-size: 11px; color: #a8a29e; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-card .s-value { font-size: 32px; font-weight: 700; letter-spacing: -1.5px; line-height: 1; }
+    .stat-card.s-pendiente  .s-value { color: #78716c; }
+    .stat-card.s-progreso   .s-value { color: #2563eb; }
+    .stat-card.s-bloqueada  .s-value { color: #dc2626; }
+    .stat-card.s-completada .s-value { color: #16a34a; }
+    .stat-bar { height: 3px; border-radius: 99px; background: #f5f5f4; margin-top: 4px; overflow: hidden; }
+    .stat-bar-fill { height: 100%; border-radius: 99px; transition: width 0.4s ease; }
+    .s-pendiente  .stat-bar-fill { background: #78716c; }
+    .s-progreso   .stat-bar-fill { background: #2563eb; }
+    .s-bloqueada  .stat-bar-fill { background: #dc2626; }
+    .s-completada .stat-bar-fill { background: #16a34a; }
 
     /* GRID */
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-    .column { display: flex; flex-direction: column; gap: 14px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .column { display: flex; flex-direction: column; gap: 16px; }
 
     /* PANELS */
-    .panel { background: #fff; border: 1px solid #e7e5e4; border-radius: 8px; overflow: hidden; }
-    .panel-header { padding: 11px 14px; border-bottom: 1px solid #f5f5f4; display: flex; align-items: center; justify-content: space-between; }
-    .panel-header h2 { font-size: 13px; font-weight: 600; }
-    .count-badge { font-size: 11px; color: #78716c; background: #f5f5f4; padding: 2px 8px; border-radius: 99px; }
-    .panel-body { padding: 8px; min-height: 60px; }
-    .empty-state { padding: 20px; text-align: center; color: #d6d3d1; font-size: 13px; }
+    .panel { background: #fff; border: 1px solid #e7e5e4; border-radius: 10px; overflow: hidden; }
+    .panel-header { padding: 12px 16px; border-bottom: 1px solid #f5f5f4; display: flex; align-items: center; justify-content: space-between; }
+    .panel-title { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .panel-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .dot-pendiente  { background: #a8a29e; }
+    .dot-progreso   { background: #2563eb; }
+    .dot-bloqueada  { background: #dc2626; }
+    .dot-completada { background: #16a34a; }
+    .count-badge { font-size: 11px; color: #78716c; background: #f5f5f4; padding: 2px 8px; border-radius: 99px; font-weight: 500; }
+    .panel-body { padding: 8px; min-height: 64px; }
+    .empty-state { padding: 24px; text-align: center; color: #d6d3d1; font-size: 13px; }
 
     /* TASK CARDS */
     .task-card {
-      padding: 10px 12px;
-      border: 1px solid #f5f5f4;
-      border-radius: 6px;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      transition: border-color 0.1s, background 0.1s;
+      padding: 11px 12px; border: 1px solid #f5f5f4; border-radius: 8px;
+      margin-bottom: 4px; display: flex; align-items: flex-start; gap: 10px;
+      transition: border-color 0.1s, box-shadow 0.1s;
+      touch-action: manipulation;
     }
     .task-card:last-child { margin-bottom: 0; }
-    .task-card:hover { background: #fafaf9; border-color: #e7e5e4; }
+    .task-card:hover { border-color: #e7e5e4; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
     .task-content { flex: 1; min-width: 0; cursor: pointer; }
-    .task-name { font-size: 13px; font-weight: 500; color: #1c1917; margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .task-desc { font-size: 12px; color: #a8a29e; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .task-footer { display: flex; align-items: center; gap: 6px; margin-top: 5px; }
+    .task-name { font-size: 13px; font-weight: 500; color: #1c1917; margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .task-desc { font-size: 12px; color: #a8a29e; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 6px; }
+    .task-footer { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 
-    .badge { font-size: 11px; padding: 1px 7px; border-radius: 99px; font-weight: 500; }
+    /* BADGES */
+    .badge { font-size: 11px; padding: 2px 7px; border-radius: 99px; font-weight: 500; white-space: nowrap; }
     .badge-pendiente  { background: #f5f5f4; color: #78716c; }
     .badge-progreso   { background: #eff6ff; color: #2563eb; }
     .badge-bloqueada  { background: #fef2f2; color: #dc2626; }
     .badge-completada { background: #f0fdf4; color: #16a34a; }
 
+    /* ASIGNADO */
+    .badge-nico    { background: #f5f3ff; color: #7c3aed; }
+    .badge-esteban { background: #fff7ed; color: #c2410c; }
+    .badge-ambos   { background: #f0fdf4; color: #15803d; }
+
     /* CHECK BUTTON */
     .check-btn {
-      width: 18px; height: 18px;
-      border: 1.5px solid #d6d3d1;
-      border-radius: 4px;
-      background: #fff;
-      cursor: pointer;
-      flex-shrink: 0;
+      width: 20px; height: 20px; border: 1.5px solid #d6d3d1; border-radius: 5px;
+      background: #fff; cursor: pointer; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.15s;
-      margin-top: 2px;
+      transition: all 0.15s; margin-top: 1px; touch-action: manipulation;
     }
-    .check-btn:hover { border-color: #16a34a; }
+    .check-btn:hover { border-color: #16a34a; background: #f0fdf4; }
     .check-btn.done { background: #16a34a; border-color: #16a34a; }
     .check-btn.done::after {
-      content: '';
-      display: block;
-      width: 9px; height: 5px;
-      border-left: 2px solid #fff;
-      border-bottom: 2px solid #fff;
+      content: ''; display: block; width: 10px; height: 6px;
+      border-left: 2px solid #fff; border-bottom: 2px solid #fff;
       transform: rotate(-45deg) translateY(-1px);
     }
 
-    /* CYCLE HINT */
-    .cycle-hint { font-size: 10px; color: #d6d3d1; }
-
-    /* FORM PANEL */
-    .form-body { padding: 14px 16px; border-top: 1px solid #f5f5f4; }
-    .form-row { display: grid; grid-template-columns: 2fr 2fr 1fr auto; gap: 10px; align-items: end; }
-    .field label { display: block; font-size: 11px; font-weight: 500; color: #78716c; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.4px; }
-    .field input, .field select {
-      width: 100%;
-      padding: 7px 10px;
-      border: 1px solid #e7e5e4;
-      border-radius: 6px;
-      font-size: 13px;
-      color: #1c1917;
-      background: #fff;
+    /* COMPLETADAS (collapsible) */
+    .completadas-toggle {
+      width: 100%; padding: 10px 16px; background: #fff; border: 1px solid #e7e5e4;
+      border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: 500;
+      color: #78716c; display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px; transition: background 0.1s;
     }
-    .field input:focus, .field select:focus { outline: none; border-color: #a8a29e; }
+    .completadas-toggle:hover { background: #fafaf9; }
+    .completadas-section { display: none; margin-bottom: 16px; }
+    .completadas-section.open { display: block; }
+    .task-card.completada-card .task-name { text-decoration: line-through; color: #a8a29e; }
+
+    /* FORM */
+    .form-panel { background: #fff; border: 1px solid #e7e5e4; border-radius: 10px; overflow: hidden; }
+    .form-body { padding: 16px 18px; border-top: 1px solid #f5f5f4; }
+    .form-row { display: grid; grid-template-columns: 2fr 2fr 1.2fr 1.2fr auto; gap: 10px; align-items: end; }
+    .field label { display: block; font-size: 11px; font-weight: 500; color: #78716c; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .field input, .field select {
+      width: 100%; padding: 8px 10px; border: 1px solid #e7e5e4; border-radius: 7px;
+      font-size: 13px; color: #1c1917; background: #fff; transition: border-color 0.1s;
+    }
+    .field input:focus, .field select:focus { outline: none; border-color: #a8a29e; box-shadow: 0 0 0 3px rgba(168,162,158,0.1); }
+    .keyboard-hint { font-size: 11px; color: #d6d3d1; margin-top: 6px; }
 
     /* SETUP MODAL */
-    .modal-bg {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.35);
-      z-index: 300;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 300; align-items: center; justify-content: center; padding: 20px; }
     .modal-bg.visible { display: flex; }
-    .modal {
-      background: #fff;
-      border-radius: 10px;
-      padding: 24px;
-      max-width: 580px;
-      width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
-      position: relative;
-    }
+    .modal { background: #fff; border-radius: 12px; padding: 24px; max-width: 580px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; }
     .modal h2 { font-size: 15px; font-weight: 600; margin-bottom: 16px; }
     .modal-close { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: #a8a29e; line-height: 1; }
     .modal-close:hover { color: #1c1917; }
     .modal p, .modal li { font-size: 13px; color: #44403c; line-height: 1.7; }
     .modal ol { margin: 8px 0 16px 18px; display: flex; flex-direction: column; gap: 4px; }
-    .modal strong { color: #1c1917; display: block; margin-top: 6px; }
+    .modal strong { color: #1c1917; display: block; margin-top: 8px; }
     .modal code { background: #f5f5f4; padding: 1px 6px; border-radius: 4px; font-size: 12px; font-family: monospace; }
 
-    /* TOUCH — elimina delay 300ms */
+    /* TOUCH */
     button, .check-btn, .task-card { touch-action: manipulation; }
 
-    /* FAB — boton flotante nueva tarea (solo mobile) */
+    /* FAB */
     .fab {
-      display: none;
-      position: fixed;
-      bottom: 22px;
-      right: 20px;
-      width: 52px;
-      height: 52px;
-      background: #1c1917;
-      color: #fff;
-      border: none;
-      border-radius: 50%;
-      font-size: 26px;
-      line-height: 1;
-      cursor: pointer;
-      z-index: 50;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-      align-items: center;
-      justify-content: center;
+      display: none; position: fixed; bottom: 22px; right: 20px;
+      width: 52px; height: 52px; background: #1c1917; color: #fff;
+      border: none; border-radius: 50%; font-size: 26px; line-height: 1;
+      cursor: pointer; z-index: 50; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      align-items: center; justify-content: center;
     }
 
-    /* MODAL nueva tarea (mobile) */
-    .fab-modal-bg {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 100;
-      align-items: flex-end;
-    }
+    /* MODAL MOBILE */
+    .fab-modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100; align-items: flex-end; }
     .fab-modal-bg.visible { display: flex; }
-    .fab-modal {
-      background: #fff;
-      width: 100%;
-      border-radius: 16px 16px 0 0;
-      padding: 20px 20px 32px;
-    }
+    .fab-modal { background: #fff; width: 100%; border-radius: 16px 16px 0 0; padding: 20px 20px 32px; }
     .fab-modal h3 { font-size: 15px; font-weight: 600; margin-bottom: 16px; }
     .fab-modal .field { margin-bottom: 12px; }
     .fab-modal .field label { display: block; font-size: 11px; font-weight: 500; color: #78716c; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
-    .fab-modal .field input,
-    .fab-modal .field select {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #e7e5e4;
-      border-radius: 8px;
-      font-size: 16px;
-      color: #1c1917;
-      background: #fafaf9;
+    .fab-modal .field input, .fab-modal .field select {
+      width: 100%; padding: 13px 14px; border: 1px solid #e7e5e4;
+      border-radius: 8px; font-size: 16px; color: #1c1917; background: #fafaf9;
     }
-    .fab-modal .field input:focus,
-    .fab-modal .field select:focus { outline: none; border-color: #a8a29e; background: #fff; }
+    .fab-modal .field input:focus, .fab-modal .field select:focus { outline: none; border-color: #a8a29e; background: #fff; }
     .fab-modal-actions { display: flex; gap: 10px; margin-top: 16px; }
-    .fab-modal-actions button { flex: 1; padding: 13px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid #e7e5e4; }
+    .fab-modal-actions button { flex: 1; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid #e7e5e4; }
     .fab-modal-actions .fab-cancel { background: #fff; color: #78716c; }
     .fab-modal-actions .fab-create { background: #1c1917; color: #fff; border-color: #1c1917; }
 
@@ -312,70 +239,50 @@
       .grid  { grid-template-columns: 1fr; }
       .config-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      .main { padding: 12px 14px; padding-bottom: 80px; }
-
-      /* Header simplificado */
-      .header { padding: 12px 16px; }
+      .main { padding: 12px 14px; padding-bottom: 84px; }
+      .header { padding: 0 16px; }
       #toggleAutoBtn, .btn-cfg { display: none; }
-      #autoLabel { display: none; }
-
-      /* Inputs sin zoom en iOS */
-      .field input, .field select,
-      .config-field input { font-size: 16px !important; }
-
-      /* Touch targets mas grandes */
+      .header-sync { display: none; }
+      .field input, .field select, .config-field input { font-size: 16px !important; }
       .check-btn { width: 26px; height: 26px; border-radius: 6px; }
       .check-btn.done::after { width: 12px; height: 7px; }
       .task-card { padding: 13px 12px; }
-      .btn-danger { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
-
-      /* Sin hint de clic en mobile */
-      .cycle-hint { display: none; }
-
-      /* Ocultar form de escritorio, usar FAB */
+      .btn-danger { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
       .panel.desktop-form { display: none; }
-
-      /* FAB visible */
       .fab { display: flex; }
-
-      /* Stats mas compactas */
-      .stat-card { padding: 12px 14px; }
-      .stat-card .value { font-size: 26px; }
+      .stat-card .s-value { font-size: 26px; }
+      .completadas-toggle { border-radius: 8px; }
+      .keyboard-hint { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- LOADING -->
 <div class="loading-overlay" id="loadingOverlay">Sincronizando...</div>
 
 <!-- HEADER -->
 <div class="header">
-  <div>
+  <div class="header-brand">
+    <div class="header-logo">B</div>
     <div class="header-title">Dashboard de Tareas</div>
-    <div class="header-sub" id="syncTime">Sin sincronizar</div>
   </div>
   <div class="header-right">
-    <span class="sync-time" id="autoLabel">Auto: ON</span>
-    <button class="btn active" id="toggleAutoBtn" onclick="toggleAuto()">Pausar auto</button>
+    <span class="header-sync"><span class="conn-dot" id="connDot"></span><span id="syncTime">Sin sincronizar</span></span>
+    <button class="btn" id="toggleAutoBtn" onclick="toggleAuto()">Auto: ON</button>
     <button class="btn btn-cfg" onclick="toggleConfig()">Configuracion</button>
     <button class="btn btn-primary" onclick="loadTasks()">Actualizar</button>
   </div>
 </div>
 
-<!-- STATUS BAR -->
 <div class="status-bar" id="statusBar"></div>
 
 <!-- CONFIG PANEL -->
 <div class="config-panel" id="configPanel">
   <div class="config-title">Conexion a Google Sheets</div>
-
   <div class="mode-toggle">
     <button class="mode-btn active" id="btnModeApps" onclick="setMode('appsscript')">Apps Script (recomendado)</button>
     <button class="mode-btn"        id="btnModeAPI"  onclick="setMode('sheetsapi')">Sheets API + OAuth</button>
   </div>
-
-  <!-- Apps Script config -->
   <div id="cfgApps">
     <div class="config-grid">
       <div class="config-field full">
@@ -384,34 +291,17 @@
       </div>
     </div>
     <div class="config-note">
-      Copia y despliega el codigo Apps Script incluido al final de este archivo como Web App.<br>
       Ejecutar como: <strong>Yo</strong> &nbsp;|&nbsp; Acceso: <strong>Cualquiera</strong>.
       <a href="#" onclick="openSetup(); return false;">Ver guia paso a paso</a>
     </div>
   </div>
-
-  <!-- Sheets API config -->
   <div id="cfgAPI" style="display:none;">
     <div class="config-grid">
-      <div class="config-field">
-        <label>Client ID (OAuth 2.0)</label>
-        <input type="text" id="clientId" placeholder="xxxxxx.apps.googleusercontent.com" />
-      </div>
-      <div class="config-field">
-        <label>Spreadsheet ID</label>
-        <input type="text" id="spreadsheetId" placeholder="1BxiMVs0XRA5nFMd..." />
-      </div>
-      <div class="config-field">
-        <label>Nombre de la hoja</label>
-        <input type="text" id="sheetName" value="Tareas" />
-      </div>
-    </div>
-    <div class="config-note">
-      Requiere proyecto en <a href="https://console.cloud.google.com" target="_blank">Google Cloud Console</a>
-      con Sheets API activada y origen autorizado. <a href="#" onclick="openSetup(); return false;">Ver guia</a>
+      <div class="config-field"><label>Client ID (OAuth 2.0)</label><input type="text" id="clientId" placeholder="xxxxxx.apps.googleusercontent.com" /></div>
+      <div class="config-field"><label>Spreadsheet ID</label><input type="text" id="spreadsheetId" placeholder="1BxiMVs0XRA5nFMd..." /></div>
+      <div class="config-field"><label>Nombre de la hoja</label><input type="text" id="sheetName" value="Tareas" /></div>
     </div>
   </div>
-
   <div class="config-actions">
     <button class="btn btn-primary" onclick="connect()">Conectar</button>
     <button class="btn" onclick="openSetup()">Guia de configuracion</button>
@@ -424,79 +314,82 @@
   <!-- STATS -->
   <div class="stats">
     <div class="stat-card s-pendiente">
-      <div class="label">Pendientes</div>
-      <div class="value" id="sPendiente">0</div>
+      <div class="s-label">Pendientes</div>
+      <div class="s-value" id="sPendiente">0</div>
+      <div class="stat-bar"><div class="stat-bar-fill" id="barPendiente" style="width:0%"></div></div>
     </div>
     <div class="stat-card s-progreso">
-      <div class="label">En Progreso</div>
-      <div class="value" id="sProgreso">0</div>
+      <div class="s-label">En Progreso</div>
+      <div class="s-value" id="sProgreso">0</div>
+      <div class="stat-bar"><div class="stat-bar-fill" id="barProgreso" style="width:0%"></div></div>
     </div>
     <div class="stat-card s-bloqueada">
-      <div class="label">Bloqueadas</div>
-      <div class="value" id="sBloqueada">0</div>
+      <div class="s-label">Bloqueadas</div>
+      <div class="s-value" id="sBloqueada">0</div>
+      <div class="stat-bar"><div class="stat-bar-fill" id="barBloqueada" style="width:0%"></div></div>
     </div>
     <div class="stat-card s-completada">
-      <div class="label">Completadas</div>
-      <div class="value" id="sCompletada">0</div>
+      <div class="s-label">Completadas</div>
+      <div class="s-value" id="sCompletada">0</div>
+      <div class="stat-bar"><div class="stat-bar-fill" id="barCompletada" style="width:0%"></div></div>
     </div>
   </div>
 
   <!-- GRID 2 COLUMNAS -->
   <div class="grid">
-
-    <!-- IZQUIERDA: PENDIENTES -->
     <div class="column">
       <div class="panel">
         <div class="panel-header">
-          <h2>Requieren Atencion</h2>
+          <div class="panel-title"><span class="panel-dot dot-pendiente"></span> Requieren Atencion</div>
           <span class="count-badge" id="cPendiente">0</span>
         </div>
-        <div class="panel-body" id="lPendiente">
-          <div class="empty-state">Sin tareas pendientes</div>
-        </div>
+        <div class="panel-body" id="lPendiente"><div class="empty-state">Sin tareas pendientes</div></div>
       </div>
     </div>
-
-    <!-- DERECHA: EN PROGRESO + BLOQUEADAS -->
     <div class="column">
       <div class="panel">
         <div class="panel-header">
-          <h2>En Progreso</h2>
+          <div class="panel-title"><span class="panel-dot dot-progreso"></span> En Progreso</div>
           <span class="count-badge" id="cProgreso">0</span>
         </div>
-        <div class="panel-body" id="lProgreso">
-          <div class="empty-state">Sin tareas en progreso</div>
-        </div>
+        <div class="panel-body" id="lProgreso"><div class="empty-state">Sin tareas en progreso</div></div>
       </div>
-
       <div class="panel">
         <div class="panel-header">
-          <h2>Bloqueadas</h2>
+          <div class="panel-title"><span class="panel-dot dot-bloqueada"></span> Bloqueadas</div>
           <span class="count-badge" id="cBloqueada">0</span>
         </div>
-        <div class="panel-body" id="lBloqueada">
-          <div class="empty-state">Sin tareas bloqueadas</div>
-        </div>
+        <div class="panel-body" id="lBloqueada"><div class="empty-state">Sin tareas bloqueadas</div></div>
       </div>
     </div>
+  </div>
 
+  <!-- COMPLETADAS (collapsible) -->
+  <button class="completadas-toggle" onclick="toggleCompletadas()">
+    <span><span class="panel-dot dot-completada" style="display:inline-block;margin-right:7px;"></span>Completadas — <span id="cCompletada">0</span> tareas</span>
+    <span id="completadasIcon">&#8964;</span>
+  </button>
+  <div class="completadas-section" id="completadasSection">
+    <div class="panel">
+      <div class="panel-body" id="lCompletada"><div class="empty-state">Sin tareas completadas</div></div>
+    </div>
   </div>
 
   <!-- FORM ESCRITORIO -->
-  <div class="panel desktop-form">
+  <div class="panel form-panel desktop-form">
     <div class="panel-header" style="cursor:pointer;" onclick="toggleForm()">
-      <h2>Nueva Tarea</h2>
-      <span class="count-badge" id="formIcon">—</span>
+      <div class="panel-title">Nueva Tarea</div>
+      <span class="count-badge" id="formIcon">— presiona N</span>
     </div>
     <div class="form-body" id="taskForm">
       <div class="form-row">
         <div class="field">
           <label>Nombre *</label>
-          <input type="text" id="fNombre" placeholder="Nombre de la tarea" />
+          <input type="text" id="fNombre" placeholder="Nombre de la tarea" autocomplete="off" />
         </div>
         <div class="field">
-          <label>Descripcion (opcional)</label>
-          <input type="text" id="fDesc" placeholder="Descripcion breve" />
+          <label>Descripcion</label>
+          <input type="text" id="fDesc" placeholder="Opcional" autocomplete="off" />
         </div>
         <div class="field">
           <label>Estado</label>
@@ -507,37 +400,47 @@
             <option>Completada</option>
           </select>
         </div>
-        <div>
-          <button class="btn btn-primary" onclick="createTask()">Crear Tarea</button>
+        <div class="field">
+          <label>Asignado a</label>
+          <select id="fAsignado">
+            <option value="">Sin asignar</option>
+            <option>Nico</option>
+            <option>Esteban</option>
+            <option>Ambos</option>
+          </select>
+        </div>
+        <div style="padding-bottom:1px;">
+          <button class="btn btn-primary" onclick="createTask()" style="height:36px; padding: 0 16px;">Crear</button>
         </div>
       </div>
+      <div class="keyboard-hint">Tip: Enter para crear &nbsp;·&nbsp; N para enfocar el formulario</div>
     </div>
   </div>
 
 </div>
 
-<!-- FAB (mobile) -->
+<!-- FAB mobile -->
 <button class="fab" onclick="openFabModal()" title="Nueva tarea">+</button>
 
-<!-- MODAL NUEVA TAREA (mobile) -->
+<!-- MODAL NUEVA TAREA mobile -->
 <div class="fab-modal-bg" id="fabModalBg">
   <div class="fab-modal">
     <h3>Nueva Tarea</h3>
-    <div class="field">
-      <label>Nombre *</label>
-      <input type="text" id="mNombre" placeholder="Nombre de la tarea" />
-    </div>
-    <div class="field">
-      <label>Descripcion (opcional)</label>
-      <input type="text" id="mDesc" placeholder="Descripcion breve" />
-    </div>
+    <div class="field"><label>Nombre *</label><input type="text" id="mNombre" placeholder="Nombre de la tarea" /></div>
+    <div class="field"><label>Descripcion</label><input type="text" id="mDesc" placeholder="Opcional" /></div>
     <div class="field">
       <label>Estado</label>
       <select id="mEstado">
-        <option>Pendiente</option>
-        <option>En Progreso</option>
-        <option>Bloqueada</option>
-        <option>Completada</option>
+        <option>Pendiente</option><option>En Progreso</option><option>Bloqueada</option><option>Completada</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Asignado a</label>
+      <select id="mAsignado">
+        <option value="">Sin asignar</option>
+        <option>Nico</option>
+        <option>Esteban</option>
+        <option>Ambos</option>
       </select>
     </div>
     <div class="fab-modal-actions">
@@ -552,31 +455,18 @@
   <div class="modal">
     <button class="modal-close" onclick="closeSetup()">&times;</button>
     <h2>Guia de Configuracion</h2>
-
-    <strong>Opcion A — Google Apps Script (sin OAuth, recomendado)</strong>
+    <strong>Opcion A — Google Apps Script (recomendado)</strong>
     <ol>
       <li>Ve a <a href="https://script.google.com" target="_blank">script.google.com</a> y crea un proyecto nuevo.</li>
-      <li>Borra el contenido y pega el codigo que esta al final del archivo <code>dashboard-tareas.html</code>.</li>
-      <li>Cambia <code>SPREADSHEET_ID</code> por el ID de tu hoja de calculo.</li>
-      <li>Tu hoja debe tener una pestana llamada <code>Tareas</code> con la fila de encabezados:<br>
-          <code>ID | Nombre | Descripcion | Estado | Creada | Actualizada</code></li>
-      <li>Haz clic en <strong>Implementar → Nueva implementacion → Aplicacion web</strong>.</li>
-      <li>Ejecutar como: <em>Yo</em>. Acceso: <em>Cualquiera</em>. Autoriza y copia la URL.</li>
-      <li>Pega la URL en el campo "URL del Web App" y haz clic en <strong>Conectar</strong>.</li>
+      <li>Pega el codigo Apps Script (ver al final de este archivo HTML).</li>
+      <li>Cambia <code>SPREADSHEET_ID</code> por el ID de tu hoja.</li>
+      <li>La hoja debe tener columnas: <code>ID | Nombre | Descripcion | Estado | Creada | Actualizada | Asignado</code></li>
+      <li>Ejecuta <code>initSheet()</code> una vez para crear los encabezados.</li>
+      <li>Implementar → Nueva implementacion → Aplicacion web. Ejecutar como: Yo. Acceso: Cualquiera.</li>
+      <li>Pega la URL en Configuracion → Conectar.</li>
     </ol>
-
-    <strong>Opcion B — Sheets API + OAuth</strong>
-    <ol>
-      <li>Ve a <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a>.</li>
-      <li>Crea un proyecto, activa <strong>Google Sheets API</strong>.</li>
-      <li>En Credenciales, crea un <em>ID de cliente OAuth 2.0</em> → Aplicacion web.</li>
-      <li>Agrega el origen donde abres este HTML como "Origen de JavaScript autorizado".<br>
-          (Ej: <code>http://localhost:8080</code> si lo sirves localmente)</li>
-      <li>Copia el Client ID. Ingresalo junto con el Spreadsheet ID y haz clic en <strong>Conectar</strong>.</li>
-    </ol>
-
     <p style="margin-top:12px; font-size:12px; color:#a8a29e;">
-      El ID de la hoja de calculo es la parte de la URL entre /d/ y /edit.<br>
+      ID de la hoja: la parte de la URL entre /d/ y /edit.<br>
       Ej: docs.google.com/spreadsheets/d/<strong>1BxiMVs0XRA5...</strong>/edit
     </p>
   </div>
@@ -584,7 +474,7 @@
 
 <script>
 // ============================================================
-//  ESTADO GLOBAL
+//  CONFIG
 // ============================================================
 const CFG = {
   mode: 'appsscript',
@@ -594,30 +484,32 @@ const CFG = {
   sheetName: 'Tareas',
 };
 
-let tasks          = [];
-let nextId         = 1;
-let autoOn         = true;
-let autoTimer      = null;
-let isConnected    = false;
-let accessToken    = null;
-let tokenClient    = null;
-let formOpen       = true;
+let tasks       = [];
+let nextId      = 1;
+let autoOn      = true;
+let autoTimer   = null;
+let isConnected = false;
+let accessToken = null;
+let tokenClient = null;
+let formOpen    = true;
+let completadasOpen = false;
 
 // ============================================================
 //  INIT
 // ============================================================
 window.addEventListener('load', () => {
   restoreConfig();
-  document.getElementById('fNombre').addEventListener('keydown', e => {
-    if (e.key === 'Enter') createTask();
+  document.getElementById('fNombre').addEventListener('keydown', e => { if (e.key === 'Enter') createTask(); });
+  document.getElementById('mNombre').addEventListener('keydown', e => { if (e.key === 'Enter') createTaskMobile(); });
+  // Shortcut N: enfocar formulario
+  document.addEventListener('keydown', e => {
+    if (e.key === 'n' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') {
+      e.preventDefault();
+      document.getElementById('fNombre').focus();
+      if (!formOpen) toggleForm();
+    }
   });
-  document.getElementById('mNombre').addEventListener('keydown', e => {
-    if (e.key === 'Enter') createTaskMobile();
-  });
-  // Auto-conectar si ya hay URL guardada
-  if (CFG.appsScriptUrl) {
-    goConnected();
-  }
+  if (CFG.appsScriptUrl) goConnected();
 });
 
 function restoreConfig() {
@@ -634,9 +526,7 @@ function restoreConfig() {
   } catch(_) {}
 }
 
-function persistConfig() {
-  localStorage.setItem('bruma_cfg', JSON.stringify(CFG));
-}
+function persistConfig() { localStorage.setItem('bruma_cfg', JSON.stringify(CFG)); }
 
 // ============================================================
 //  MODO
@@ -657,17 +547,13 @@ function connect() {
   if (CFG.mode === 'appsscript') {
     CFG.appsScriptUrl = document.getElementById('appsScriptUrl').value.trim();
     if (!CFG.appsScriptUrl) { showStatus('Ingresa la URL del Web App.', 'error'); return; }
-    persistConfig();
-    goConnected();
+    persistConfig(); goConnected();
   } else {
     CFG.clientId      = document.getElementById('clientId').value.trim();
     CFG.spreadsheetId = document.getElementById('spreadsheetId').value.trim();
     CFG.sheetName     = document.getElementById('sheetName').value.trim() || 'Tareas';
-    if (!CFG.clientId || !CFG.spreadsheetId) {
-      showStatus('Completa Client ID y Spreadsheet ID.', 'error'); return;
-    }
-    persistConfig();
-    initOAuth();
+    if (!CFG.clientId || !CFG.spreadsheetId) { showStatus('Completa Client ID y Spreadsheet ID.', 'error'); return; }
+    persistConfig(); initOAuth();
   }
 }
 
@@ -675,6 +561,7 @@ function goConnected() {
   isConnected = true;
   document.getElementById('mainContent').style.display = '';
   document.getElementById('configPanel').style.display = 'none';
+  document.getElementById('connDot').classList.add('on');
   loadTasks();
   startAutoRefresh();
 }
@@ -683,17 +570,13 @@ function goConnected() {
 //  OAUTH
 // ============================================================
 function initOAuth() {
-  if (typeof google === 'undefined') {
-    showStatus('Cargando libreria Google...', 'warning');
-    setTimeout(initOAuth, 800); return;
-  }
+  if (typeof google === 'undefined') { showStatus('Cargando libreria Google...', 'warning'); setTimeout(initOAuth, 800); return; }
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CFG.clientId,
     scope: 'https://www.googleapis.com/auth/spreadsheets',
     callback: (res) => {
       if (res.error) { showStatus('Error OAuth: ' + res.error, 'error'); return; }
-      accessToken = res.access_token;
-      goConnected();
+      accessToken = res.access_token; goConnected();
     }
   });
   tokenClient.requestAccessToken({ prompt: 'consent' });
@@ -706,58 +589,43 @@ async function loadTasks() {
   if (!isConnected) return;
   setLoading(true);
   try {
-    if (CFG.mode === 'appsscript') {
-      await loadAppsScript();
-    } else {
-      await loadSheetsAPI();
-    }
-    updateSyncTime();
-    hideStatus();
-  } catch(e) {
-    showStatus('Error al cargar: ' + e.message, 'error');
-  }
+    CFG.mode === 'appsscript' ? await loadAppsScript() : await loadSheetsAPI();
+    updateSyncTime(); hideStatus();
+  } catch(e) { showStatus('Error al cargar: ' + e.message, 'error'); }
   setLoading(false);
 }
 
 async function loadAppsScript() {
-  const url = CFG.appsScriptUrl + '?action=getTasks&_=' + Date.now();
-  const res = await fetch(url);
+  const url  = CFG.appsScriptUrl + '?action=getTasks&_=' + Date.now();
+  const res  = await fetch(url);
   if (!res.ok) throw new Error('HTTP ' + res.status);
   const data = await res.json();
   if (data.error) throw new Error(data.error);
   tasks = (data.tasks || []).filter(t => t.nombre);
-  calcNextId();
-  render();
+  calcNextId(); render();
 }
 
 async function loadSheetsAPI() {
-  const range = encodeURIComponent(CFG.sheetName + '!A:F');
+  const range = encodeURIComponent(CFG.sheetName + '!A:G');
   const url   = `https://sheets.googleapis.com/v4/spreadsheets/${CFG.spreadsheetId}/values/${range}`;
   const res   = await fetch(url, { headers: { Authorization: 'Bearer ' + accessToken } });
   if (!res.ok) { const e = await res.json(); throw new Error(e.error?.message || 'API error'); }
   const data  = await res.json();
-  parseRows(data.values || []);
-  render();
+  parseRows(data.values || []); render();
 }
 
 function parseRows(rows) {
   if (rows.length <= 1) { tasks = []; return; }
   tasks = rows.slice(1).map((r, i) => ({
-    id:          String(r[0] || ''),
-    nombre:      r[1] || '',
-    descripcion: r[2] || '',
-    estado:      r[3] || 'Pendiente',
-    creada:      r[4] || '',
-    actualizada: r[5] || '',
-    _row:        i + 2   // 1-indexed, skip header row
+    id: String(r[0] || ''), nombre: r[1] || '', descripcion: r[2] || '',
+    estado: r[3] || 'Pendiente', creada: r[4] || '', actualizada: r[5] || '',
+    asignado: r[6] || '', _row: i + 2
   })).filter(t => t.nombre.trim());
   calcNextId();
 }
 
 function calcNextId() {
-  nextId = tasks.length
-    ? Math.max(...tasks.map(t => parseInt(t.id) || 0)) + 1
-    : 1;
+  nextId = tasks.length ? Math.max(...tasks.map(t => parseInt(t.id) || 0)) + 1 : 1;
 }
 
 // ============================================================
@@ -768,47 +636,51 @@ async function createTask() {
   if (!nombre) { document.getElementById('fNombre').focus(); return; }
   const descripcion = document.getElementById('fDesc').value.trim();
   const estado      = document.getElementById('fEstado').value;
-
+  const asignado    = document.getElementById('fAsignado').value;
   document.getElementById('fNombre').value = '';
   document.getElementById('fDesc').value   = '';
   document.getElementById('fEstado').value = 'Pendiente';
+  document.getElementById('fAsignado').value = '';
+  await saveTask(nombre, descripcion, estado, asignado);
+}
 
+async function createTaskMobile() {
+  const nombre = document.getElementById('mNombre').value.trim();
+  if (!nombre) { document.getElementById('mNombre').focus(); return; }
+  const descripcion = document.getElementById('mDesc').value.trim();
+  const estado      = document.getElementById('mEstado').value;
+  const asignado    = document.getElementById('mAsignado').value;
+  closeFabModal();
+  await saveTask(nombre, descripcion, estado, asignado);
+}
+
+async function saveTask(nombre, descripcion, estado, asignado) {
   setLoading(true);
   try {
     if (CFG.mode === 'appsscript') {
-      await createAppsScript(nombre, descripcion, estado);
+      const p   = new URLSearchParams({ action: 'createTask', nombre, descripcion, estado, asignado });
+      const res = await fetch(CFG.appsScriptUrl + '?' + p);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      await loadAppsScript();
     } else {
-      await createSheetsAPI(nombre, descripcion, estado);
+      const id  = nextId++;
+      const now = nowStr();
+      const range = encodeURIComponent(CFG.sheetName + '!A:G');
+      const url   = `https://sheets.googleapis.com/v4/spreadsheets/${CFG.spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED`;
+      const res   = await fetch(url, {
+        method: 'POST',
+        headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ values: [[id, nombre, descripcion, estado, now, now, asignado]] })
+      });
+      if (!res.ok) throw new Error('API error');
+      await loadSheetsAPI();
     }
     showStatus('Tarea creada.', 'success');
     setTimeout(hideStatus, 2000);
-  } catch(e) {
-    showStatus('Error al crear: ' + e.message, 'error');
-  }
+  } catch(e) { showStatus('Error al crear: ' + e.message, 'error'); }
   setLoading(false);
-}
-
-async function createAppsScript(nombre, descripcion, estado) {
-  const p   = new URLSearchParams({ action: 'createTask', nombre, descripcion, estado });
-  const res = await fetch(CFG.appsScriptUrl + '?' + p);
-  if (!res.ok) throw new Error('HTTP ' + res.status);
-  const data = await res.json();
-  if (data.error) throw new Error(data.error);
-  await loadAppsScript();
-}
-
-async function createSheetsAPI(nombre, descripcion, estado) {
-  const id  = nextId++;
-  const now = nowStr();
-  const range = encodeURIComponent(CFG.sheetName + '!A:F');
-  const url   = `https://sheets.googleapis.com/v4/spreadsheets/${CFG.spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED`;
-  const res   = await fetch(url, {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ values: [[id, nombre, descripcion, estado, now, now]] })
-  });
-  if (!res.ok) throw new Error('API error');
-  await loadSheetsAPI();
 }
 
 // ============================================================
@@ -826,20 +698,14 @@ async function setEstado(taskId, newEstado, evt) {
       if (data.error) throw new Error(data.error);
       await loadAppsScript();
     } else {
-      const task = tasks.find(t => t.id === taskId);
+      const task  = tasks.find(t => t.id === taskId);
       if (!task) return;
       const range = encodeURIComponent(`${CFG.sheetName}!D${task._row}:F${task._row}`);
       const url   = `https://sheets.googleapis.com/v4/spreadsheets/${CFG.spreadsheetId}/values/${range}?valueInputOption=USER_ENTERED`;
-      await fetch(url, {
-        method: 'PUT',
-        headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ values: [[newEstado, task.creada, nowStr()]] })
-      });
+      await fetch(url, { method: 'PUT', headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' }, body: JSON.stringify({ values: [[newEstado, task.creada, nowStr()]] }) });
       await loadSheetsAPI();
     }
-  } catch(e) {
-    showStatus('Error al actualizar: ' + e.message, 'error');
-  }
+  } catch(e) { showStatus('Error al actualizar: ' + e.message, 'error'); }
   setLoading(false);
 }
 
@@ -850,17 +716,15 @@ function toggleComplete(taskId, evt) {
   setEstado(taskId, task.estado === 'Completada' ? 'Pendiente' : 'Completada', evt);
 }
 
-// Clic en tarjeta: cicla estado
 function cycleEstado(taskId) {
-  const task = tasks.find(t => t.id === taskId);
+  const task  = tasks.find(t => t.id === taskId);
   if (!task) return;
   const order = ['Pendiente', 'En Progreso', 'Bloqueada', 'Completada'];
-  const next  = order[(order.indexOf(task.estado) + 1) % order.length];
-  setEstado(taskId, next, null);
+  setEstado(taskId, order[(order.indexOf(task.estado) + 1) % order.length], null);
 }
 
 // ============================================================
-//  ELIMINAR TAREA
+//  ELIMINAR
 // ============================================================
 async function deleteTask(taskId, evt) {
   evt.stopPropagation();
@@ -877,14 +741,11 @@ async function deleteTask(taskId, evt) {
     } else {
       const task  = tasks.find(t => t.id === taskId);
       if (!task) return;
-      const range = encodeURIComponent(`${CFG.sheetName}!A${task._row}:F${task._row}`);
-      const url   = `https://sheets.googleapis.com/v4/spreadsheets/${CFG.spreadsheetId}/values/${range}:clear`;
-      await fetch(url, { method: 'POST', headers: { Authorization: 'Bearer ' + accessToken } });
+      const range = encodeURIComponent(`${CFG.sheetName}!A${task._row}:G${task._row}`);
+      await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CFG.spreadsheetId}/values/${range}:clear`, { method: 'POST', headers: { Authorization: 'Bearer ' + accessToken } });
       await loadSheetsAPI();
     }
-  } catch(e) {
-    showStatus('Error al eliminar: ' + e.message, 'error');
-  }
+  } catch(e) { showStatus('Error al eliminar: ' + e.message, 'error'); }
   setLoading(false);
 }
 
@@ -896,34 +757,43 @@ function render() {
   const enProgreso  = tasks.filter(t => t.estado === 'En Progreso');
   const bloqueadas  = tasks.filter(t => t.estado === 'Bloqueada');
   const completadas = tasks.filter(t => t.estado === 'Completada');
+  const total = tasks.length || 1;
 
+  // Stats + barras
   document.getElementById('sPendiente').textContent  = pendientes.length;
   document.getElementById('sProgreso').textContent   = enProgreso.length;
   document.getElementById('sBloqueada').textContent  = bloqueadas.length;
   document.getElementById('sCompletada').textContent = completadas.length;
+  document.getElementById('barPendiente').style.width  = (pendientes.length  / total * 100) + '%';
+  document.getElementById('barProgreso').style.width   = (enProgreso.length  / total * 100) + '%';
+  document.getElementById('barBloqueada').style.width  = (bloqueadas.length  / total * 100) + '%';
+  document.getElementById('barCompletada').style.width = (completadas.length / total * 100) + '%';
 
+  // Counts
   document.getElementById('cPendiente').textContent = pendientes.length;
   document.getElementById('cProgreso').textContent  = enProgreso.length;
   document.getElementById('cBloqueada').textContent = bloqueadas.length;
+  document.getElementById('cCompletada').textContent = completadas.length;
 
-  renderList('lPendiente', pendientes, 'Sin tareas pendientes');
-  renderList('lProgreso',  enProgreso, 'Sin tareas en progreso');
-  renderList('lBloqueada', bloqueadas, 'Sin tareas bloqueadas');
+  renderList('lPendiente', pendientes, 'Sin tareas pendientes', false);
+  renderList('lProgreso',  enProgreso, 'Sin tareas en progreso', false);
+  renderList('lBloqueada', bloqueadas, 'Sin tareas bloqueadas', false);
+  renderList('lCompletada', completadas, 'Sin tareas completadas', true);
 }
 
-function renderList(id, list, empty) {
+function renderList(id, list, empty, isCompletadas) {
   const el = document.getElementById(id);
   if (!list.length) { el.innerHTML = `<div class="empty-state">${empty}</div>`; return; }
   el.innerHTML = list.map(t => `
-    <div class="task-card">
+    <div class="task-card ${isCompletadas ? 'completada-card' : ''}">
       <div class="check-btn ${t.estado === 'Completada' ? 'done' : ''}"
-           onclick="toggleComplete('${t.id}', event)" title="Marcar completada"></div>
-      <div class="task-content" onclick="cycleEstado('${t.id}')" title="Clic para cambiar estado">
+           onclick="toggleComplete('${t.id}', event)"></div>
+      <div class="task-content" onclick="${isCompletadas ? '' : `cycleEstado('${t.id}')`}">
         <div class="task-name">${esc(t.nombre)}</div>
         ${t.descripcion ? `<div class="task-desc">${esc(t.descripcion)}</div>` : ''}
         <div class="task-footer">
           <span class="badge badge-${badgeClass(t.estado)}">${t.estado}</span>
-          <span class="cycle-hint">clic para avanzar</span>
+          ${t.asignado ? `<span class="badge badge-${asignadoClass(t.asignado)}">${esc(t.asignado)}</span>` : ''}
         </div>
       </div>
       <button class="btn btn-danger" onclick="deleteTask('${t.id}', event)" title="Eliminar">&times;</button>
@@ -933,6 +803,10 @@ function renderList(id, list, empty) {
 
 function badgeClass(e) {
   return { 'Pendiente': 'pendiente', 'En Progreso': 'progreso', 'Bloqueada': 'bloqueada', 'Completada': 'completada' }[e] || 'pendiente';
+}
+
+function asignadoClass(a) {
+  return { 'Nico': 'nico', 'Esteban': 'esteban', 'Ambos': 'ambos' }[a] || 'pendiente';
 }
 
 function esc(s) {
@@ -949,8 +823,7 @@ function startAutoRefresh() {
 
 function toggleAuto() {
   autoOn = !autoOn;
-  document.getElementById('autoLabel').textContent   = 'Auto: ' + (autoOn ? 'ON' : 'OFF');
-  document.getElementById('toggleAutoBtn').textContent = autoOn ? 'Pausar auto' : 'Reanudar auto';
+  document.getElementById('toggleAutoBtn').textContent = 'Auto: ' + (autoOn ? 'ON' : 'OFF');
   document.getElementById('toggleAutoBtn').classList.toggle('active', autoOn);
 }
 
@@ -965,32 +838,29 @@ function toggleConfig() {
 function toggleForm() {
   formOpen = !formOpen;
   document.getElementById('taskForm').style.display = formOpen ? '' : 'none';
-  document.getElementById('formIcon').textContent    = formOpen ? '—' : '+';
+  document.getElementById('formIcon').textContent = formOpen ? '— presiona N' : '+ presiona N';
 }
 
-function setLoading(v) {
-  document.getElementById('loadingOverlay').classList.toggle('visible', v);
+function toggleCompletadas() {
+  completadasOpen = !completadasOpen;
+  document.getElementById('completadasSection').classList.toggle('open', completadasOpen);
+  document.getElementById('completadasIcon').innerHTML = completadasOpen ? '&#8963;' : '&#8964;';
 }
+
+function setLoading(v) { document.getElementById('loadingOverlay').classList.toggle('visible', v); }
 
 function showStatus(msg, type = 'warning') {
   const el = document.getElementById('statusBar');
-  el.textContent  = msg;
-  el.className    = 'status-bar ' + type;
-  el.style.display = '';
+  el.textContent = msg; el.className = 'status-bar ' + type; el.style.display = '';
 }
 
-function hideStatus() {
-  document.getElementById('statusBar').style.display = 'none';
-}
+function hideStatus() { document.getElementById('statusBar').style.display = 'none'; }
 
 function updateSyncTime() {
-  document.getElementById('syncTime').textContent =
-    'Actualizado: ' + new Date().toLocaleTimeString('es-CL');
+  document.getElementById('syncTime').textContent = 'Actualizado ' + new Date().toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
 }
 
-function nowStr() {
-  return new Date().toISOString().slice(0, 19).replace('T', ' ');
-}
+function nowStr() { return new Date().toISOString().slice(0, 19).replace('T', ' '); }
 
 function openSetup()  { document.getElementById('setupModal').classList.add('visible'); }
 function closeSetup() { document.getElementById('setupModal').classList.remove('visible'); }
@@ -999,7 +869,6 @@ document.getElementById('setupModal').addEventListener('click', e => {
   if (e.target === document.getElementById('setupModal')) closeSetup();
 });
 
-// FAB MODAL
 function openFabModal() {
   document.getElementById('fabModalBg').classList.add('visible');
   setTimeout(() => document.getElementById('mNombre').focus(), 100);
@@ -1007,30 +876,10 @@ function openFabModal() {
 
 function closeFabModal() {
   document.getElementById('fabModalBg').classList.remove('visible');
-  document.getElementById('mNombre').value  = '';
-  document.getElementById('mDesc').value    = '';
-  document.getElementById('mEstado').value  = 'Pendiente';
-}
-
-async function createTaskMobile() {
-  const nombre = document.getElementById('mNombre').value.trim();
-  if (!nombre) { document.getElementById('mNombre').focus(); return; }
-  const descripcion = document.getElementById('mDesc').value.trim();
-  const estado      = document.getElementById('mEstado').value;
-  closeFabModal();
-  setLoading(true);
-  try {
-    if (CFG.mode === 'appsscript') {
-      await createAppsScript(nombre, descripcion, estado);
-    } else {
-      await createSheetsAPI(nombre, descripcion, estado);
-    }
-    showStatus('Tarea creada.', 'success');
-    setTimeout(hideStatus, 2000);
-  } catch(e) {
-    showStatus('Error al crear: ' + e.message, 'error');
-  }
-  setLoading(false);
+  document.getElementById('mNombre').value   = '';
+  document.getElementById('mDesc').value     = '';
+  document.getElementById('mEstado').value   = 'Pendiente';
+  document.getElementById('mAsignado').value = '';
 }
 
 document.getElementById('fabModalBg').addEventListener('click', e => {
@@ -1040,32 +889,20 @@ document.getElementById('fabModalBg').addEventListener('click', e => {
 
 <!--
 ================================================================
-  CODIGO GOOGLE APPS SCRIPT
-  Instrucciones:
-  1. Ve a https://script.google.com y crea un proyecto nuevo
-  2. Pega este codigo (reemplaza todo el contenido)
-  3. Cambia SPREADSHEET_ID por el ID de tu hoja
-  4. Ejecuta initSheet() una vez para crear los encabezados
-  5. Implementar -> Nueva implementacion -> Aplicacion web
-     Ejecutar como: Yo | Acceso: Cualquiera
-  6. Copia la URL y pegala en el campo "URL del Web App"
+  CODIGO GOOGLE APPS SCRIPT — ACTUALIZADO CON CAMPO ASIGNADO
+  Reemplaza TODO el contenido del script y vuelve a hacer deploy
+  (Implementar > Administrar implementaciones > editar > Nueva version)
 ================================================================
 
-const SPREADSHEET_ID = 'PEGA_TU_SPREADSHEET_ID_AQUI';
+const SPREADSHEET_ID = '1_ZNfWwZKIgm_fEDlFTBP-1MCX8gMoj8HN8lrV1R7JSY';
 const SHEET_NAME     = 'Tareas';
 
 function doGet(e) {
   const action = e.parameter.action;
-  if (action === 'getTasks') return json(getTasks());
-  return json({ error: 'Accion no reconocida: ' + action });
-}
-
-function doPost(e) {
-  const body   = JSON.parse(e.postData.contents);
-  const action = body.action;
-  if (action === 'createTask') return json(createTask(body));
-  if (action === 'updateTask') return json(updateTask(body));
-  if (action === 'deleteTask') return json(deleteTask(body));
+  if (action === 'getTasks')   return json(getTasks());
+  if (action === 'createTask') return json(createTask(e.parameter));
+  if (action === 'updateTask') return json(updateTask(e.parameter));
+  if (action === 'deleteTask') return json(deleteTask(e.parameter));
   return json({ error: 'Accion no reconocida: ' + action });
 }
 
@@ -1074,31 +911,26 @@ function getTasks() {
   const data  = sheet.getDataRange().getValues();
   if (data.length <= 1) return { tasks: [] };
   const tasks = data.slice(1).map(r => ({
-    id:          String(r[0]),
-    nombre:      r[1],
-    descripcion: r[2],
-    estado:      r[3],
-    creada:      r[4],
-    actualizada: r[5]
+    id: String(r[0]), nombre: r[1], descripcion: r[2],
+    estado: r[3], creada: r[4], actualizada: r[5], asignado: r[6] || ''
   })).filter(t => t.nombre);
   return { tasks };
 }
 
-function createTask(body) {
+function createTask(params) {
   const sheet = getSheet();
-  const rows  = sheet.getLastRow();
-  const id    = rows;    // ID simple basado en numero de fila
+  const id    = sheet.getLastRow();
   const now   = nowStr();
-  sheet.appendRow([id, body.nombre, body.descripcion || '', body.estado || 'Pendiente', now, now]);
+  sheet.appendRow([id, params.nombre, params.descripcion || '', params.estado || 'Pendiente', now, now, params.asignado || '']);
   return { success: true };
 }
 
-function updateTask(body) {
+function updateTask(params) {
   const sheet = getSheet();
   const data  = sheet.getDataRange().getValues();
   for (let i = 1; i < data.length; i++) {
-    if (String(data[i][0]) === String(body.id)) {
-      sheet.getRange(i + 1, 4).setValue(body.estado);
+    if (String(data[i][0]) === String(params.id)) {
+      sheet.getRange(i + 1, 4).setValue(params.estado);
       sheet.getRange(i + 1, 6).setValue(nowStr());
       return { success: true };
     }
@@ -1106,11 +938,11 @@ function updateTask(body) {
   return { error: 'Tarea no encontrada' };
 }
 
-function deleteTask(body) {
+function deleteTask(params) {
   const sheet = getSheet();
   const data  = sheet.getDataRange().getValues();
   for (let i = 1; i < data.length; i++) {
-    if (String(data[i][0]) === String(body.id)) {
+    if (String(data[i][0]) === String(params.id)) {
       sheet.deleteRow(i + 1);
       return { success: true };
     }
@@ -1127,17 +959,14 @@ function nowStr() {
 }
 
 function json(data) {
-  return ContentService
-    .createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
 }
 
-// Ejecuta esta funcion UNA VEZ para crear los encabezados en la hoja
 function initSheet() {
   const ss    = SpreadsheetApp.openById(SPREADSHEET_ID);
   let   sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
-  sheet.getRange(1, 1, 1, 6).setValues([['ID', 'Nombre', 'Descripcion', 'Estado', 'Creada', 'Actualizada']]);
+  sheet.getRange(1, 1, 1, 7).setValues([['ID', 'Nombre', 'Descripcion', 'Estado', 'Creada', 'Actualizada', 'Asignado']]);
   sheet.setFrozenRows(1);
   Logger.log('Hoja inicializada correctamente.');
 }
