@@ -246,13 +246,101 @@
     .modal strong { color: #1c1917; display: block; margin-top: 6px; }
     .modal code { background: #f5f5f4; padding: 1px 6px; border-radius: 4px; font-size: 12px; font-family: monospace; }
 
+    /* TOUCH — elimina delay 300ms */
+    button, .check-btn, .task-card { touch-action: manipulation; }
+
+    /* FAB — boton flotante nueva tarea (solo mobile) */
+    .fab {
+      display: none;
+      position: fixed;
+      bottom: 22px;
+      right: 20px;
+      width: 52px;
+      height: 52px;
+      background: #1c1917;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 50;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* MODAL nueva tarea (mobile) */
+    .fab-modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 100;
+      align-items: flex-end;
+    }
+    .fab-modal-bg.visible { display: flex; }
+    .fab-modal {
+      background: #fff;
+      width: 100%;
+      border-radius: 16px 16px 0 0;
+      padding: 20px 20px 32px;
+    }
+    .fab-modal h3 { font-size: 15px; font-weight: 600; margin-bottom: 16px; }
+    .fab-modal .field { margin-bottom: 12px; }
+    .fab-modal .field label { display: block; font-size: 11px; font-weight: 500; color: #78716c; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .fab-modal .field input,
+    .fab-modal .field select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #e7e5e4;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #1c1917;
+      background: #fafaf9;
+    }
+    .fab-modal .field input:focus,
+    .fab-modal .field select:focus { outline: none; border-color: #a8a29e; background: #fff; }
+    .fab-modal-actions { display: flex; gap: 10px; margin-top: 16px; }
+    .fab-modal-actions button { flex: 1; padding: 13px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: 1px solid #e7e5e4; }
+    .fab-modal-actions .fab-cancel { background: #fff; color: #78716c; }
+    .fab-modal-actions .fab-create { background: #1c1917; color: #fff; border-color: #1c1917; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .stats { grid-template-columns: repeat(2, 1fr); }
       .grid  { grid-template-columns: 1fr; }
       .config-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
-      .main { padding: 14px 16px; }
+      .main { padding: 12px 14px; padding-bottom: 80px; }
+
+      /* Header simplificado */
+      .header { padding: 12px 16px; }
+      #toggleAutoBtn, .btn-cfg { display: none; }
+      #autoLabel { display: none; }
+
+      /* Inputs sin zoom en iOS */
+      .field input, .field select,
+      .config-field input { font-size: 16px !important; }
+
+      /* Touch targets mas grandes */
+      .check-btn { width: 26px; height: 26px; border-radius: 6px; }
+      .check-btn.done::after { width: 12px; height: 7px; }
+      .task-card { padding: 13px 12px; }
+      .btn-danger { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
+
+      /* Sin hint de clic en mobile */
+      .cycle-hint { display: none; }
+
+      /* Ocultar form de escritorio, usar FAB */
+      .panel.desktop-form { display: none; }
+
+      /* FAB visible */
+      .fab { display: flex; }
+
+      /* Stats mas compactas */
+      .stat-card { padding: 12px 14px; }
+      .stat-card .value { font-size: 26px; }
     }
   </style>
 </head>
@@ -270,7 +358,7 @@
   <div class="header-right">
     <span class="sync-time" id="autoLabel">Auto: ON</span>
     <button class="btn active" id="toggleAutoBtn" onclick="toggleAuto()">Pausar auto</button>
-    <button class="btn" onclick="toggleConfig()">Configuracion</button>
+    <button class="btn btn-cfg" onclick="toggleConfig()">Configuracion</button>
     <button class="btn btn-primary" onclick="loadTasks()">Actualizar</button>
   </div>
 </div>
@@ -394,8 +482,8 @@
 
   </div>
 
-  <!-- FORM -->
-  <div class="panel">
+  <!-- FORM ESCRITORIO -->
+  <div class="panel desktop-form">
     <div class="panel-header" style="cursor:pointer;" onclick="toggleForm()">
       <h2>Nueva Tarea</h2>
       <span class="count-badge" id="formIcon">—</span>
@@ -426,6 +514,37 @@
     </div>
   </div>
 
+</div>
+
+<!-- FAB (mobile) -->
+<button class="fab" onclick="openFabModal()" title="Nueva tarea">+</button>
+
+<!-- MODAL NUEVA TAREA (mobile) -->
+<div class="fab-modal-bg" id="fabModalBg">
+  <div class="fab-modal">
+    <h3>Nueva Tarea</h3>
+    <div class="field">
+      <label>Nombre *</label>
+      <input type="text" id="mNombre" placeholder="Nombre de la tarea" />
+    </div>
+    <div class="field">
+      <label>Descripcion (opcional)</label>
+      <input type="text" id="mDesc" placeholder="Descripcion breve" />
+    </div>
+    <div class="field">
+      <label>Estado</label>
+      <select id="mEstado">
+        <option>Pendiente</option>
+        <option>En Progreso</option>
+        <option>Bloqueada</option>
+        <option>Completada</option>
+      </select>
+    </div>
+    <div class="fab-modal-actions">
+      <button class="fab-cancel" onclick="closeFabModal()">Cancelar</button>
+      <button class="fab-create" onclick="createTaskMobile()">Crear Tarea</button>
+    </div>
+  </div>
 </div>
 
 <!-- SETUP MODAL -->
@@ -492,6 +611,13 @@ window.addEventListener('load', () => {
   document.getElementById('fNombre').addEventListener('keydown', e => {
     if (e.key === 'Enter') createTask();
   });
+  document.getElementById('mNombre').addEventListener('keydown', e => {
+    if (e.key === 'Enter') createTaskMobile();
+  });
+  // Auto-conectar si ya hay URL guardada
+  if (CFG.appsScriptUrl) {
+    goConnected();
+  }
 });
 
 function restoreConfig() {
@@ -871,6 +997,44 @@ function closeSetup() { document.getElementById('setupModal').classList.remove('
 
 document.getElementById('setupModal').addEventListener('click', e => {
   if (e.target === document.getElementById('setupModal')) closeSetup();
+});
+
+// FAB MODAL
+function openFabModal() {
+  document.getElementById('fabModalBg').classList.add('visible');
+  setTimeout(() => document.getElementById('mNombre').focus(), 100);
+}
+
+function closeFabModal() {
+  document.getElementById('fabModalBg').classList.remove('visible');
+  document.getElementById('mNombre').value  = '';
+  document.getElementById('mDesc').value    = '';
+  document.getElementById('mEstado').value  = 'Pendiente';
+}
+
+async function createTaskMobile() {
+  const nombre = document.getElementById('mNombre').value.trim();
+  if (!nombre) { document.getElementById('mNombre').focus(); return; }
+  const descripcion = document.getElementById('mDesc').value.trim();
+  const estado      = document.getElementById('mEstado').value;
+  closeFabModal();
+  setLoading(true);
+  try {
+    if (CFG.mode === 'appsscript') {
+      await createAppsScript(nombre, descripcion, estado);
+    } else {
+      await createSheetsAPI(nombre, descripcion, estado);
+    }
+    showStatus('Tarea creada.', 'success');
+    setTimeout(hideStatus, 2000);
+  } catch(e) {
+    showStatus('Error al crear: ' + e.message, 'error');
+  }
+  setLoading(false);
+}
+
+document.getElementById('fabModalBg').addEventListener('click', e => {
+  if (e.target === document.getElementById('fabModalBg')) closeFabModal();
 });
 </script>
 
